@@ -10,14 +10,9 @@ package pr1_1;
  * @author Derik
  */
 
-class DataOnly {
-  int i;
-  float f;
-  boolean b;
-}
+
 
 public class PR1_1 {
-
     /**
      * @param args the command line arguments
      */

@@ -21,15 +21,13 @@ public class PR2_2 {
     public static void main(String[] args) {
         ArrayList<Gerbil> Gerbils = new ArrayList();
         Random rand = new Random();
-        for(int i = 0; i < 100; i++) {
+        for(int i = 0; i < 5; i++) {
             Gerbils.add(new Gerbil(rand.nextInt(100) + 1));
         }
         
-        Iterator iterator = ArrayList.iterator();
-        }
-            
-            
-    }
-    
+        for(Iterator<Gerbil> it = Gerbils.iterator(); it.hasNext();) {
+            it.next().hop();
+        }                       
+    }    
 }
 

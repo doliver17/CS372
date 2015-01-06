@@ -4,12 +4,18 @@
  * and open the template in the editor.
  */
 
-package pr1_2;
+package pr1_3;
 
 /**
+ * This class reads in three arguments from the command line and displays them
  * @author doliver17
  */
-public class PR1_2 {
+public class PR1_3 {
+
+    /**
+     * Loops three times, reading three arguments and printing each one to the screen
+     * @param args the command line arguments
+     */
     public static void main(String[] args) {
         String s = " ";
         for(int i = 0; i < 3; i++) {

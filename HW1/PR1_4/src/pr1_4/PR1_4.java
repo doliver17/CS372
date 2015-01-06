@@ -10,7 +10,6 @@ import java.util.Scanner;
  * @author Derik
  */
 public class PR1_4 {
-    private static final double PI = 3.14;
    /**
     * The main function within the PR1_4 class
     * @param args The arguments passed from the command line
@@ -40,7 +39,7 @@ public class PR1_4 {
      * @return The calculated area of the circle
      */
     public static double calculateArea(double r) {
-        double area = PI * (r * r);
+        double area = Math.PI * (r * r);
         return area;
     }
     

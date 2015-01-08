@@ -11,22 +11,27 @@ package pr2_1;
  * @author doliver17
  */
 public class Gerbil {
-    private int gerbilNumber;
+    private Integer gerbilNumber;
     
     /**
      * Basic constructor that sets the Gerbil's number
      * @param gN The number passed to initialize the Gerbil's number
      */
-    Gerbil(int gN) {
-        gerbilNumber = gN;
+    public Gerbil(int gN) {
+        gerbilNumber = new Integer(gN);
+    }
+    
+    public String gerbilNumberString() {
+        return gerbilNumber.toString();
     }
     
     /**
      * The Gerbil's hop function
      * Displays the Gerbil's number and informs the user it is hopping
      */
-    public void hop() {
-        System.out.printf("%d: This gerbil is hopping\n", gerbilNumber);
+    public String hop() {
+       return ("This Gerbil is hopping!\n");
     }
        
 }
+

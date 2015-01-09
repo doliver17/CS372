@@ -6,11 +6,12 @@
 package pr2_6;
 import java.util.*;
 
+
 /**
  * A calculator class to calculate the min, max, and average
  * @author Derik
  */
-public class Calculator extends javax.swing.JFrame {
+public class Calculator {
    private ArrayList<Double> scores;
    private double min;
    private double max;
@@ -24,6 +25,12 @@ public class Calculator extends javax.swing.JFrame {
         min = 10000;
         max = -10000;
     }
+    
+    
+    public ArrayList<Double> GetList() {
+        return scores;
+    }
+    
     
     /**
      * Adds a homework score to the ArrayList and then check the min and max.

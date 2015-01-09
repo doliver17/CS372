@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package pr2_5;
+import java.awt.event.KeyEvent;
 import pr2_4.SeriesCalculator;
 
 /**
@@ -39,10 +40,17 @@ public class PiCalculator extends javax.swing.JFrame {
         setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         Numb.setBackground(new java.awt.Color(153, 204, 255));
+        Numb.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         Numb.setForeground(new java.awt.Color(0, 102, 102));
+        Numb.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                NumbKeyPressed(evt);
+            }
+        });
 
         Button.setBackground(new java.awt.Color(153, 204, 255));
-        Button.setForeground(new java.awt.Color(0, 102, 102));
+        Button.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        Button.setForeground(new java.awt.Color(204, 0, 0));
         Button.setText("Do Math!");
         Button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -50,10 +58,12 @@ public class PiCalculator extends javax.swing.JFrame {
             }
         });
 
+        Question.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         Question.setForeground(new java.awt.Color(0, 102, 102));
         Question.setText("How Far Would You Like to Calculate PI?");
 
         Answer.setBackground(new java.awt.Color(0, 255, 255));
+        Answer.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         Answer.setForeground(new java.awt.Color(0, 102, 102));
         Answer.setText("Answer: ");
 
@@ -65,30 +75,26 @@ public class PiCalculator extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(Button, javax.swing.GroupLayout.DEFAULT_SIZE, 580, Short.MAX_VALUE))
+                        .addComponent(Button, javax.swing.GroupLayout.PREFERRED_SIZE, 394, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(272, 272, 272)
-                                .addComponent(Numb, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(200, 200, 200)
-                                .addComponent(Question)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addGap(246, 246, 246)
-                .addComponent(Answer, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(176, 176, 176)
+                        .addComponent(Numb, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(74, 74, 74)
+                        .addComponent(Question))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(153, 153, 153)
+                        .addComponent(Answer, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(76, Short.MAX_VALUE)
-                .addComponent(Question)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addContainerGap(73, Short.MAX_VALUE)
+                .addComponent(Question, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(Numb, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(11, 11, 11)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(Button, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(Answer, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -104,9 +110,19 @@ public class PiCalculator extends javax.swing.JFrame {
     private void ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonActionPerformed
         int c = Integer.parseInt(Numb.getText());
         double x = S.CalculateSingle(c);
-        String f = String.format("Answer: %4f", x);
+        String f = String.format("Answer: %.5f", x);
         Answer.setText(f);
     }//GEN-LAST:event_ButtonActionPerformed
+
+    private void NumbKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NumbKeyPressed
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+            int c = Integer.parseInt(Numb.getText());
+            double x = S.CalculateSingle(c);
+            String f = String.format("Answer: %.5f", x);
+            Answer.setText(f);
+            Numb.setText("");
+        }
+    }//GEN-LAST:event_NumbKeyPressed
 
     /**
      * @param args the command line arguments

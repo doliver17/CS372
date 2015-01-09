@@ -9,16 +9,23 @@ import java.io.*;
 import java.util.*;
 
 /**
- *
+ * A class that reads names from a file
  * @author doliver17
  */
 public class ReadFromFile {
     private ArrayList<String> names;
     
+    /**
+     * Basic constructor - initialized the ArrayList
+     */
     public ReadFromFile() {
         names = new ArrayList<String>();
     }
     
+    /**
+     * Opens a file based on a filename, and then reads in each line adding them to an ArrayList
+     * @param filename The file location of the file to be read
+     */
     public void ReadIn(String filename) {
         File file = new File(filename);
         FileInputStream fis = null;
@@ -51,7 +58,10 @@ public class ReadFromFile {
          e.printStackTrace();
         }
     }
-    
+    /**
+     * Getter function for the ArrayList
+     * @return The ArrayList of names
+     */
     public ArrayList<String> getNames() {
         return names;
     }

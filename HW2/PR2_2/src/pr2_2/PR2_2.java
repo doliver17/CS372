@@ -25,18 +25,25 @@ public class PR2_2 {
         displayArray(Gerbils);
     }
     
-    
+    /**
+     * Creates, fills and returns an ArrayList
+     * @return an ArrayList filled with Gerbils
+     */
     
     public static ArrayList<Gerbil> fillArray() {
         ArrayList<Gerbil> Gerbils = new ArrayList();
-        for(int i = 0; i < 5; i++) {
+        for(int i = 0; i < 10; i++)   
             Gerbils.add(new Gerbil(rand.nextInt(100) + 1));
-        }
+        
         return Gerbils;
     }
 
+    /**
+     * Displays an ArrayList using an iterator
+     * @param Gerbils The ArrayList to be displayed
+     */
     public static void displayArray(ArrayList<Gerbil> Gerbils) {
-         Iterator g = Gerbils.iterator();
+        Iterator g = Gerbils.iterator();
         while(g.hasNext())
            System.out.println(((Gerbil)g.next()).hop());
     }

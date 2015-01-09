@@ -7,10 +7,13 @@
 package pr2_7;
 
 /**
- *
+ * Subclass of Cookie
  * @author doliver17
  */
 public class ThinMints extends Cookie {
+    /**
+     * Constructor that initializes cost to $3
+     */
     public ThinMints() {
         super();
         cost = 3;

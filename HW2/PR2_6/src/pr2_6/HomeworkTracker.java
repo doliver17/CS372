@@ -12,7 +12,7 @@ import com.sun.glass.events.KeyEvent;
  * @author Derik
  */
 public class HomeworkTracker extends javax.swing.JFrame {
-    Calculator C = new Calculator();
+    public static Calculator C = new Calculator();
     /**
      * Creates new form HomeworkTracker
      */
@@ -38,10 +38,14 @@ public class HomeworkTracker extends javax.swing.JFrame {
         MaxValue = new javax.swing.JLabel();
         AvgValue = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jList1 = new javax.swing.JList();
+        jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         Enter.setBackground(new java.awt.Color(204, 204, 204));
+        Enter.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         Enter.setForeground(new java.awt.Color(153, 0, 0));
         Enter.setText("Enter!");
         Enter.addActionListener(new java.awt.event.ActionListener() {
@@ -51,36 +55,59 @@ public class HomeworkTracker extends javax.swing.JFrame {
         });
 
         Score.setBackground(new java.awt.Color(204, 204, 204));
+        Score.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        Score.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                ScoreKeyPressed(evt);
+            }
+        });
 
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(153, 0, 0));
         jLabel1.setText("Min:");
 
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(153, 0, 0));
         jLabel2.setText("Max:");
 
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(153, 0, 0));
         jLabel3.setText("Average:");
 
+        MinValue.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         MinValue.setForeground(new java.awt.Color(51, 51, 51));
         MinValue.setText("MinValue");
 
+        MaxValue.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         MaxValue.setForeground(new java.awt.Color(51, 51, 51));
         MaxValue.setText("MaxValue");
 
+        AvgValue.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         AvgValue.setForeground(new java.awt.Color(51, 51, 51));
         AvgValue.setText("AvgValue");
 
+        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(153, 0, 0));
-        jLabel4.setText("Enter Your Score");
+        jLabel4.setText("Homework Score Tracker");
+
+        jList1.setModel(new javax.swing.AbstractListModel() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public Object getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane1.setViewportView(jList1);
+
+        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel5.setText("Previous Scores");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel3)
@@ -94,23 +121,35 @@ public class HomeworkTracker extends javax.swing.JFrame {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(MaxValue)
                                     .addComponent(MinValue)))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(Score, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(Enter, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 73, Short.MAX_VALUE))))
+                            .addComponent(jLabel4))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(45, 45, 45)
-                        .addComponent(jLabel4)))
-                .addContainerGap(57, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(Score, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(Enter, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 73, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jLabel4)
-                .addGap(15, 15, 15)
-                .addComponent(Score, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(Enter, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(34, 34, 34)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(15, 15, 15)
+                        .addComponent(Score, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(Enter, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(34, 34, 34))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(MinValue))
@@ -140,8 +179,25 @@ public class HomeworkTracker extends javax.swing.JFrame {
         
         String Min = String.format("%.1f", C.GetMin());
         MinValue.setText(Min);
-        
+        Score.setText("");
     }//GEN-LAST:event_EnterActionPerformed
+
+    private void ScoreKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_ScoreKeyPressed
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER) {
+        double c = Double.parseDouble(Score.getText());
+        C.AddScore(c);
+        
+        String Avg = String.format("%.1f", C.GetAvg());
+        AvgValue.setText(Avg);
+        
+        String Max = String.format("%.1f", C.GetMax());
+        MaxValue.setText(Max);
+        
+        String Min = String.format("%.1f", C.GetMin());
+        MinValue.setText(Min);
+        Score.setText("");
+        }
+    }//GEN-LAST:event_ScoreKeyPressed
 
     /**
      * @param args the command line arguments
@@ -188,5 +244,8 @@ public class HomeworkTracker extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JList jList1;
+    private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }

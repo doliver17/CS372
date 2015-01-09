@@ -10,7 +10,7 @@ import java.util.*;
  * A calculator class to calculate the min, max, and average
  * @author Derik
  */
-public class Calculator {
+public class Calculator extends javax.swing.JFrame {
    private ArrayList<Double> scores;
    private double min;
    private double max;
@@ -21,8 +21,8 @@ public class Calculator {
     */
     public Calculator() {
         scores = new ArrayList<Double>();
-        min = 1000;
-        max = -1000;
+        min = 10000;
+        max = -10000;
     }
     
     /**

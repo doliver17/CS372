@@ -29,11 +29,11 @@ public class SeriesCalculator {
         int count = 0;
         for(int i = 3; i <= l * 2 + 3; i += 2) {
             if(count % 2 == 0) {
-                pi -= 4.0 / (double)i; 
+                pi -= (4.0 / (double)i); 
                 numbers.add(pi);
             }
             else {
-                pi += 4.0 / (double)i; 
+                pi += (4.0 / (double)i); 
                 numbers.add(pi);
             }
             count++;

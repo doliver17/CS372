@@ -7,10 +7,13 @@
 package pr2_7;
 
 /**
- *
+ * Subclass of Cookie
  * @author doliver17
  */
 public class Samoas extends Cookie {
+    /**
+     * Constructor that initializes cost to $4
+     */
     public Samoas(){
         super();
         cost = 4;

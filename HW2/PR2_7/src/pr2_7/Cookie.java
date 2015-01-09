@@ -7,16 +7,16 @@
 package pr2_7;
 
 /**
- *
+ * Cookie Base class
  * @author doliver17
  */
 public class Cookie {
     int cost;
     
-    public Cookie() {
-        
-    }
-    
+    /**
+     * Getter function for the cost of the cookies
+     * @return The cost for this Cookie
+     */
     public int GetCost() {
         return cost;
     }

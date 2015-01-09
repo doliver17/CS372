@@ -13,6 +13,8 @@ public class PR1_2 {
     public static void main(String[] args) {
         String s = " ";
         for(int i = 0; i < 3; i++) {
+            //PT: Should probably be if (args.length > i)
+            //    What if you only got two arguments?
             if(args.length > 0)
                 s = args[i];
             System.out.println(s);

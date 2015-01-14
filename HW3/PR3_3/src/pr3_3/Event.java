@@ -5,6 +5,7 @@
  */
 
 package pr3_3;
+import java.util.ArrayList;
 
 /**
  *
@@ -14,34 +15,20 @@ public class Event {
     private String name;
     private String location;
     private String month;
-    private int date;
-    private int year;
+    private String date;
+    private String year;
     
-    public Event(String n, String l, String m, int d, int y) {
-        name = n;
-        location = l;
-        month = m;
-        date = d;
-        year = y;
-    }
+   @Override
+   public String toString() {
+       return name + "   " + location + "   " + month + "/" + date + "/" + year;
+   }
+   
+   public void SetAll(String n, String l, String m, String d, String y) {
+       name = n;
+       location = l;
+       month = m;
+       date = d;
+       year = y;
+   }
     
-    public String GetName() {
-        return name;
-    }
-    
-    public String GetLocation() {
-        return location;
-    }
-    
-    public String GetMonth() {
-        return month;
-    }
-    
-    public int GetDate() {
-        return date;
-    }
-    
-    public int GetYear() {
-        return year;
-    }
 }

@@ -25,7 +25,7 @@ public class ReaderWriter {
     public HashMap<String, Integer> Read() throws IOException {
         HashMap<String, Integer> users = new HashMap<String, Integer>();
         
-        File f = new File("C:\\Users\\doliver17\\Desktop\\users.txt");
+       File f = new File("C:\\Users\\doliver17\\Desktop\\users.txt");
         try {
             BufferedReader rdr = new BufferedReader(new FileReader(f));
             String line;
@@ -38,7 +38,7 @@ public class ReaderWriter {
         } 
         
         catch (FileNotFoundException ex) {
-            Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("The users file has been created");
         }
         return users;
     }
@@ -51,11 +51,11 @@ public class ReaderWriter {
         Iterator<Map.Entry<String, Integer>> iterator = users.entrySet().iterator();
         File f = new File("C:\\Users\\doliver17\\Desktop\\users.txt");
         try {
-            BufferedWriter wtr = new BufferedWriter(new FileWriter(f));
+            BufferedWriter wtr = new BufferedWriter(new FileWriter(f, false));
             String line;
             while(iterator.hasNext()) {
              Map.Entry<String, Integer> user = iterator.next();
-             wtr.write(String.format("%s %s", user.getKey(), user.getValue()));
+             wtr.write(user.getKey() + " " + user.getValue());
              wtr.newLine();
             }
             wtr.close();

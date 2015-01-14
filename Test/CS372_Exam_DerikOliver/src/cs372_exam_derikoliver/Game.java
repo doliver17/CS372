@@ -26,7 +26,7 @@ public class Game {
      * Reads all of the users and their balances from a txt file
      */
     public void Read() throws IOException {
-       users = ReadWrite.Read();
+       users = ReadWrite.Read();        
     }
     
     /**
@@ -111,6 +111,7 @@ public class Game {
                     users.replace(currentPlayer, GetPlayerBalance() - Mbet);
                 break;
         }
+        this.Save();
         return win;
     }       
 }

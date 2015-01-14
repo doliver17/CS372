@@ -6,6 +6,8 @@
 
 package cs372_exam_derikoliver;
 
+import java.awt.event.KeyEvent;
+
 /**
  *
  * @author doliver17
@@ -65,6 +67,7 @@ public class Under_Over extends javax.swing.JFrame {
         jTextField1.setText("jTextField1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Under Over");
 
         Prompt.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         Prompt.setText("Enter Your Username");
@@ -233,11 +236,10 @@ public class Under_Over extends javax.swing.JFrame {
             Results.setText("You Won!");
         else
             Results.setText("You Lost!");
-            
+                   
         Dice1Value.setText(game.getD1().toString());
         Dice2Value.setText(game.getD2().toString());
         CurrentBalance.setText(game.GetPlayerBalance().toString());
-        game.Save();
     }//GEN-LAST:event_ButtonUnder7ActionPerformed
 
     private void EnterButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EnterButtonActionPerformed
@@ -255,7 +257,6 @@ public class Under_Over extends javax.swing.JFrame {
         Dice1Value.setText(game.getD1().toString());
         Dice2Value.setText(game.getD2().toString());
         CurrentBalance.setText(game.GetPlayerBalance().toString());
-        game.Save();
     }//GEN-LAST:event_Button7ActionPerformed
 
     private void ButtonOver7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonOver7ActionPerformed
@@ -267,13 +268,14 @@ public class Under_Over extends javax.swing.JFrame {
         Dice1Value.setText(game.getD1().toString());
         Dice2Value.setText(game.getD2().toString());
         CurrentBalance.setText(game.GetPlayerBalance().toString());
-        game.Save();
     }//GEN-LAST:event_ButtonOver7ActionPerformed
 
     private void UserNameKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_UserNameKeyPressed
-        String name = UserName.getText();
-        game.NewPlayer(name);
-        CurrentBalance.setText(game.GetPlayerBalance().toString());
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            String name = UserName.getText();
+            game.NewPlayer(name);
+            CurrentBalance.setText(game.GetPlayerBalance().toString());
+        }
     }//GEN-LAST:event_UserNameKeyPressed
 
     private void Dice1ValueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Dice1ValueActionPerformed

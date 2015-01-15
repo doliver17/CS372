@@ -18,7 +18,7 @@ import javax.swing.table.DefaultTableModel;
  * @author doliver17
  */
 public class ReadFromFile {
-    private File f = new File("C:\\Users\\doliver17\\Desktop\\Event.txt");
+    private File f = new File("C:\\Users\\Derik\\Desktop\\events.txt");
     private ArrayList<String> Event = new ArrayList<String>();
     private DefaultTableModel eModel = new DefaultTableModel();
     private int row = 1;

@@ -20,7 +20,7 @@ public class Event {
     
    @Override
    public String toString() {
-       return name + "   " + location + "   " + month + "/" + date + "/" + year;
+       return name + " " + location + " " + month + " " + date + " " + year;
    }
    
    public void SetAll(String n, String l, String m, String d, String y) {

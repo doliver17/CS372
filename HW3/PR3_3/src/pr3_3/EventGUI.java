@@ -14,6 +14,7 @@ import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -75,6 +76,9 @@ public class EventGUI extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         jScrollPane4 = new javax.swing.JScrollPane();
         EventTable = new javax.swing.JTable();
+        SortByDate = new javax.swing.JButton();
+        SortByName = new javax.swing.JButton();
+        SortByLocation = new javax.swing.JButton();
 
         jButton1.setText("jButton1");
 
@@ -285,6 +289,33 @@ public class EventGUI extends javax.swing.JFrame {
             EventTable.getColumnModel().getColumn(4).setPreferredWidth(50);
         }
 
+        SortByDate.setBackground(new java.awt.Color(153, 153, 255));
+        SortByDate.setForeground(new java.awt.Color(0, 0, 153));
+        SortByDate.setText("SortByDate");
+        SortByDate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SortByDateActionPerformed(evt);
+            }
+        });
+
+        SortByName.setBackground(new java.awt.Color(153, 153, 255));
+        SortByName.setForeground(new java.awt.Color(0, 0, 153));
+        SortByName.setText("SortByName");
+        SortByName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SortByNameActionPerformed(evt);
+            }
+        });
+
+        SortByLocation.setBackground(new java.awt.Color(153, 153, 255));
+        SortByLocation.setForeground(new java.awt.Color(0, 0, 153));
+        SortByLocation.setText("SortByLocation");
+        SortByLocation.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SortByLocationActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -313,19 +344,25 @@ public class EventGUI extends javax.swing.JFrame {
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                         .addComponent(Name, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(Location, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(Enter, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(38, 38, 38)))
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 368, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addGap(194, 194, 194)
-                .addComponent(jLabel1)
-                .addGap(72, 72, 72)
-                .addComponent(jLabel8)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(43, 43, 43)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(44, 44, 44)
+                        .addComponent(jLabel8))
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 368, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(8, 8, 8)
+                        .addComponent(SortByDate, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(SortByName, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(SortByLocation, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(6, 6, 6))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -359,70 +396,124 @@ public class EventGUI extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(Year, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel6))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
                         .addComponent(Enter, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(23, 23, 23))
                     .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                        .addContainerGap())))
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(SortByName, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(SortByLocation, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(SortByDate, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void EnterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EnterActionPerformed
-        String name = Name.getText();
-        String location = Location.getText();
-        String month = Month.getText();
-        String day = Date.getText();
-        String year = Year.getText();
-        
-        EM.AddEvent(new Event(name, location, month, day, year));
-   
-        
-        WTR.Write(EM.GetList().get(EM.GetList().size() - 1).toString());
+        try {
+            String name = Name.getText();
+            String location = Location.getText();
+            String month = Month.getText();
+            String day = Date.getText();
+            String year = Year.getText();
+            if(Integer.parseInt(month) > 12 || Integer.parseInt(day) > 31) {
+                JOptionPane.showMessageDialog(this, "You Did Not Enter a Valid Date\n Your Event Was Not Added");
+                throw new Exception("Date is Out of Bounds");                    
+            }
+            EM.AddEvent(new Event(name, location, month, day, year));
+            WTR.Write(EM.GetList().get(EM.GetList().size() - 1).toString());
+               
+            String[] words = (EM.GetList().get(EM.GetList().size() - 1).toString()).split("-");
+            for(int i = 0; i < words.length; i ++)
+                EventTable.setValueAt(words[i], col, i);
+            col++;
+            
+            Name.setText("");
+            Location.setText("");
+            Month.setText("");
+            Date.setText("");
+            Year.setText("");
+        }             
+        catch(Exception E) {
+            System.out.print(E.getMessage());
+        }
        
         
-        String[] words = (EM.GetList().get(EM.GetList().size() - 1).toString()).split("-");
-        for(int i = 0; i < words.length; i ++)
-            EventTable.setValueAt(words[i], col, i);
-        col++;
-        
-        Name.setText("");
-        Location.setText("");
-        Month.setText("");
-        Date.setText("");
-        Year.setText("");
     }//GEN-LAST:event_EnterActionPerformed
 
     private void YearKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_YearKeyPressed
         if(evt.getKeyCode() == KeyEvent.VK_ENTER) {
-        String name = Name.getText();
-        String location = Location.getText();
-        String month = Month.getText();
-        String day = Date.getText();
-        String year = Year.getText();
-        
-        EM.AddEvent(new Event(name, location, month, day, year));
-   
-   
-        
-        WTR.Write(EM.GetList().get(EM.GetList().size() - 1).toString());
+            try {
+                String name = Name.getText();
+                String location = Location.getText();
+                String month = Month.getText();
+                String day = Date.getText();
+                String year = Year.getText();
+                if(Integer.parseInt(month) > 12 || Integer.parseInt(day) > 31) {
+                    JOptionPane.showMessageDialog(this, "You Did Not Enter a Valid Date\n Your Event Was Not Added");
+                    throw new Exception("Date is Out of Bounds");                    
+                }
+                EM.AddEvent(new Event(name, location, month, day, year));
+                WTR.Write(EM.GetList().get(EM.GetList().size() - 1).toString());
+               
+                String[] words = (EM.GetList().get(EM.GetList().size() - 1).toString()).split("-");
+                for(int i = 0; i < words.length; i ++)
+                    EventTable.setValueAt(words[i], col, i);
+                col++;
+                
+                Name.setText("");
+                Location.setText("");
+                Month.setText("");
+                Date.setText("");
+                Year.setText("");
+            }             
+            catch(Exception E) {
+                System.out.print(E.getMessage());
+            }
        
-        
-        String[] words = (EM.GetList().get(EM.GetList().size() - 1).toString()).split("-");
-        for(int i = 0; i < words.length; i ++)
-            EventTable.setValueAt(words[i], col, i);
-        col++;
-        
-        Name.setText("");
-        Location.setText("");
-        Month.setText("");
-        Date.setText("");
-        Year.setText("");
+     
         }
     }//GEN-LAST:event_YearKeyPressed
+
+    private void SortByDateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SortByDateActionPerformed
+        col = 0;
+        Collections.sort(EM.GetList(), EventManager.DateComparator);
+        String[] event;
+        for(int i = 0; i < EM.GetList().size(); i++) {
+            event = EM.GetList().get(i).toString().split("-");
+            for(int j = 0; j < event.length; j ++)
+                EventTable.setValueAt(event[j], col, j);
+            col++;                
+        }
+    }//GEN-LAST:event_SortByDateActionPerformed
+
+    private void SortByNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SortByNameActionPerformed
+        col = 0;
+        Collections.sort(EM.GetList(), EventManager.NameComparaotr);
+        String[] event;
+        for(int i = 0; i < EM.GetList().size(); i++) {
+            event = EM.GetList().get(i).toString().split("-");
+            for(int j = 0; j < event.length; j ++)
+                EventTable.setValueAt(event[j], col, j);
+            col++;                
+        }
+    }//GEN-LAST:event_SortByNameActionPerformed
+
+    private void SortByLocationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SortByLocationActionPerformed
+        col = 0;
+        Collections.sort(EM.GetList(), EventManager.LocationComparator);
+        String[] event;
+        for(int i = 0; i < EM.GetList().size(); i++) {
+            event = EM.GetList().get(i).toString().split("-");
+            for(int j = 0; j < event.length; j ++)
+                EventTable.setValueAt(event[j], col, j);
+            col++;                
+        }
+    }//GEN-LAST:event_SortByLocationActionPerformed
 
     /**
      * @param args the command line arguments
@@ -466,6 +557,9 @@ public class EventGUI extends javax.swing.JFrame {
     private javax.swing.JTextField Location;
     private javax.swing.JTextField Month;
     private javax.swing.JTextField Name;
+    private javax.swing.JButton SortByDate;
+    private javax.swing.JButton SortByLocation;
+    private javax.swing.JButton SortByName;
     private javax.swing.JTextField Year;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;

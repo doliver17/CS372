@@ -11,12 +11,16 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
+ * The class to write a string to a file
  * @author doliver17
  */
 public class WriteToFile {
-    private File f = new File("C:\\Users\\doliver17\\Desktop\\events.txt");
-
+    private File f = new File("C:\\Users\\Derik\\Desktop\\events.txt");
+    
+    /**
+     *   Writes a string to a txt file
+     * @param S The string to be written
+     */
     public void Write(String S) {
         try {
             BufferedWriter wtr = new BufferedWriter(new FileWriter(f, true));
@@ -26,7 +30,7 @@ public class WriteToFile {
         } 
         
         catch (Exception ex) {
-            System.out.println("C:\\Users\\doliver17\\Desktop\\events.txt");
+            System.out.println("C:\\Users\\Derik\\Desktop\\events.txt");
         }
     }
     

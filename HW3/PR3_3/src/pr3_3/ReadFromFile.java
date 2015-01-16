@@ -14,19 +14,17 @@ import javax.swing.table.DefaultTableModel;
 
 
 /**
- *
+ * Class that read string from a txt file into an ArrayList
  * @author doliver17
  */
 public class ReadFromFile {
-    private File f = new File("C:\\Users\\doliver17\\Desktop\\events.txt");
+    private File f = new File("C:\\Users\\Derik\\Desktop\\events.txt");
     private ArrayList<String> Event = new ArrayList<String>();
-    private DefaultTableModel eModel = new DefaultTableModel();
-    private int row = 1;
     
-    public ReadFromFile() {
-     
-    }
-    
+    /**
+     * The function to read
+     * @throws IOException 
+     */
     public void Read() throws IOException {
         try {
             BufferedReader rdr = new BufferedReader(new FileReader(f));
@@ -42,12 +40,11 @@ public class ReadFromFile {
         }  
     }
     
+    /**
+     * Getter function for the ArrayList of strings
+     * @return The ArrayList of string containing information about the events
+     */
     public ArrayList<String> GetList() {
         return Event;
     }
-    
-    public DefaultTableModel getModel() {
-        return eModel;   
-    }
-
 }

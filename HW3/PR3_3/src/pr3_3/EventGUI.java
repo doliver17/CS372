@@ -8,6 +8,9 @@ package pr3_3;
 
 import java.awt.event.KeyEvent;
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
@@ -17,9 +20,8 @@ import javax.swing.DefaultListModel;
  * @author doliver17
  */
 public class EventGUI extends javax.swing.JFrame {
-    public static Event E = new Event();
+    public static EventManager EM = new EventManager();
     public static WriteToFile WTR = new WriteToFile();
-    public static ReadFromFile RDR = new ReadFromFile();
     private int col = 0;
     
     /**
@@ -27,11 +29,19 @@ public class EventGUI extends javax.swing.JFrame {
      */
     public EventGUI() {
         initComponents();
-
-        try {
-            RDR.Read();
-        } catch (IOException ex) {
-            Logger.getLogger(EventGUI.class.getName()).log(Level.SEVERE, null, ex);
+        Read();
+       
+    }
+    
+    public void Read() {
+        EM.Read();
+        Collections.sort(EM.GetList(), EventManager.DateComparator);
+        String[] event;
+        for(int i = 0; i < EM.GetList().size(); i++) {
+            event = EM.GetList().get(i).toString().split("-");
+            for(int j = 0; j < event.length; j ++)
+                EventTable.setValueAt(event[j], col, j);
+            col++;                
         }
     }
 
@@ -123,13 +133,13 @@ public class EventGUI extends javax.swing.JFrame {
         jLabel3.setText("Location");
 
         jLabel4.setForeground(new java.awt.Color(0, 0, 153));
-        jLabel4.setText("Month");
+        jLabel4.setText("Month (MM)");
 
         jLabel5.setForeground(new java.awt.Color(0, 0, 153));
-        jLabel5.setText("Date");
+        jLabel5.setText("Day (DD)");
 
         jLabel6.setForeground(new java.awt.Color(0, 0, 153));
-        jLabel6.setText("Year");
+        jLabel6.setText("Year (YYYY)");
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(153, 0, 0));
@@ -268,11 +278,11 @@ public class EventGUI extends javax.swing.JFrame {
             EventTable.getColumnModel().getColumn(0).setResizable(false);
             EventTable.getColumnModel().getColumn(1).setResizable(false);
             EventTable.getColumnModel().getColumn(2).setResizable(false);
-            EventTable.getColumnModel().getColumn(2).setPreferredWidth(100);
+            EventTable.getColumnModel().getColumn(2).setPreferredWidth(25);
             EventTable.getColumnModel().getColumn(3).setResizable(false);
-            EventTable.getColumnModel().getColumn(3).setPreferredWidth(50);
+            EventTable.getColumnModel().getColumn(3).setPreferredWidth(25);
             EventTable.getColumnModel().getColumn(4).setResizable(false);
-            EventTable.getColumnModel().getColumn(4).setPreferredWidth(75);
+            EventTable.getColumnModel().getColumn(4).setPreferredWidth(50);
         }
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -302,11 +312,12 @@ public class EventGUI extends javax.swing.JFrame {
                                     .addComponent(jLabel7)
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                         .addComponent(Name, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(Location, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(59, 59, 59)
-                        .addComponent(Enter, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
+                                        .addComponent(Location, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(Enter, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(38, 38, 38)))
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 368, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
@@ -364,15 +375,16 @@ public class EventGUI extends javax.swing.JFrame {
         String name = Name.getText();
         String location = Location.getText();
         String month = Month.getText();
-        String date = Date.getText();
+        String day = Date.getText();
         String year = Year.getText();
         
-        E.SetAll(name, location, month, date, year);
+        EM.AddEvent(new Event(name, location, month, day, year));
+   
         
-        WTR.Write(E.toString());
+        WTR.Write(EM.GetList().get(EM.GetList().size() - 1).toString());
        
         
-        String[] words = E.toString().split(" ");
+        String[] words = (EM.GetList().get(EM.GetList().size() - 1).toString()).split("-");
         for(int i = 0; i < words.length; i ++)
             EventTable.setValueAt(words[i], col, i);
         col++;
@@ -389,13 +401,20 @@ public class EventGUI extends javax.swing.JFrame {
         String name = Name.getText();
         String location = Location.getText();
         String month = Month.getText();
-        String date = Date.getText();
+        String day = Date.getText();
         String year = Year.getText();
         
-        E.SetAll(name, location, month, date, year);
+        EM.AddEvent(new Event(name, location, month, day, year));
+   
+   
         
-        WTR.Write(E.toString());
+        WTR.Write(EM.GetList().get(EM.GetList().size() - 1).toString());
+       
         
+        String[] words = (EM.GetList().get(EM.GetList().size() - 1).toString()).split("-");
+        for(int i = 0; i < words.length; i ++)
+            EventTable.setValueAt(words[i], col, i);
+        col++;
         
         Name.setText("");
         Location.setText("");

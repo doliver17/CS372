@@ -5,7 +5,11 @@
  */
 
 package pr3_3;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.Date;
 
 /**
  *
@@ -15,20 +19,35 @@ public class Event {
     private String name;
     private String location;
     private String month;
-    private String date;
+    private String day;
     private String year;
     
    @Override
    public String toString() {
-       return name + " " + location + " " + month + " " + date + " " + year;
+       return name + "-" + location + "-" + month + "-" + day + "-" + year;
    }
    
-   public void SetAll(String n, String l, String m, String d, String y) {
+   public Event( String n, String l, String m, String d, String y) {
        name = n;
        location = l;
        month = m;
-       date = d;
+       day = d;
        year = y;
    }
+  
+   public String GetYear() {
+       return year;
+   }
+   
+   public String GetMonth() {
+       return month;
+   }
+   
+   public String GetDay() {
+       return day;
+   }
+ 
+   
+   
     
 }

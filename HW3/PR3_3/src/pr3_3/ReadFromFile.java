@@ -18,7 +18,7 @@ import javax.swing.table.DefaultTableModel;
  * @author doliver17
  */
 public class ReadFromFile {
-    private File f = new File("C:\\Users\\Derik\\Desktop\\events.txt");
+    private File f = new File("C:\\Users\\doliver17\\Desktop\\events.txt");
     private ArrayList<String> Event = new ArrayList<String>();
     private DefaultTableModel eModel = new DefaultTableModel();
     private int row = 1;
@@ -30,7 +30,7 @@ public class ReadFromFile {
     public void Read() throws IOException {
         try {
             BufferedReader rdr = new BufferedReader(new FileReader(f));
-            String line = "Stuff";
+            String line = "";
             String words[];
             while((line = rdr.readLine()) != null ) 
                 Event.add(line);          

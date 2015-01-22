@@ -10,6 +10,10 @@ package tdfinal;
  * @author Derik
  */
 public class Values {
-    public static int trackID = 0;
+    public static int trackID = 1;
     public static int airID = -1;
+    public static int track = 0;
+    
+    public static int enemyAir = -1;
+    public static int enemyG = 0;
 }

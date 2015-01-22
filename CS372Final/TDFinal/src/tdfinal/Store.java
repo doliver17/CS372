@@ -47,8 +47,12 @@ public class Store {
             }
             g.drawImage(Screen.tileset_buttons[0],button[i].x, button[i].y, button[i].width, button[i].height, null);
         }
-        g.setColor(new Color(0, 0, 0, 255));
         g.drawImage(Screen.tileset_buttons[2], buttonHealth.x, buttonHealth.y, buttonHealth.width, buttonHealth.height, null);
         g.drawImage(Screen.tileset_buttons[1], money.x, money.y, money.width, money.height, null);
+        g.setFont(new Font("Helvetica", Font.BOLD, 18));
+        g.setColor(Color.black);
+        g.drawString("" + Screen.health, buttonHealth.x + buttonHealth.width + 10, buttonHealth.y + 28);
+        g.drawString("" + Screen.money, money.x + money.width + 10, money.y + 28);
+        
     }
 }

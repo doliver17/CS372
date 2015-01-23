@@ -22,7 +22,7 @@ public class Block extends Rectangle {
     
     public void draw(Graphics g) {
         g.drawImage(Screen.tileset_track[trackID], x, y, width, height, null);
-        g.drawRect(x, y, width, height);
+        //g.drawRect(x, y, width, height);
         
         if(airID != Values.airID) {
             g.drawImage(Screen.tileset_track[airID], x, y, width, height, null);

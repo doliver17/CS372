@@ -13,8 +13,8 @@ import java.awt.*;
  * @author Derik
  */
 public class Manager {
-    public int worldWidth = 39;
-    public int worldHeight = 25;
+    public int worldWidth = 43;
+    public int worldHeight = 29;
     public int blockSize = 31;
     
     public Block[][] world;

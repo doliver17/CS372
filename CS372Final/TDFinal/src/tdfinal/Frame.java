@@ -14,7 +14,7 @@ import java.awt.*;
  */
 public class Frame extends JFrame {
     public static String title = "Alien Defense";
-    public static Dimension size = new Dimension(1215, 810);
+    public static Dimension size = new Dimension(1345, 935);
     
     public Frame() {
         setTitle(title);

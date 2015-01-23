@@ -124,10 +124,9 @@ public class Enemy extends Rectangle {
 			}
 			
 			eWalk += 1;
-			
 			// Keeps track of coordinates relative to the map's layout
-			if(eWalk == Screen.manager.blockSize) { 
-				if(dir == down)	
+			if(eWalk == Screen.manager.blockSize) { // If the enemy has gone the distance of a block 
+				if(dir == down)	 // Increment the coordinate values 
 					yCoord += 1;
 				else if(dir == right)
 					xCoord += 1;
@@ -137,28 +136,28 @@ public class Enemy extends Rectangle {
 					xCoord -= 1;
 				
 				// Changing Direction - Follows the path which is determined by the trackID
-				if(!hasRight){
+				if(!hasRight){ // If the enemy is not already moving right
 					if(Screen.manager.world[yCoord][xCoord - 1].trackID == Values.track){
 						dir = left;
 						image = Screen.tileset_soldier[4];
 					}
 				}				
 				
-				if(!hasDown){					
+				if(!hasDown){  // If the enemy is not already moving down					
 					if(Screen.manager.world[yCoord - 1][xCoord].trackID == Values.track){
 						dir = up;
 						image = Screen.tileset_soldier[6];
 					}
 				}
 				
-				if(!hasUp){					
+				if(!hasUp){	  // If the enemy is not already moving up				
 					if(Screen.manager.world[yCoord + 1][xCoord].trackID == Values.track){
 						dir = down;
 						image = Screen.tileset_soldier[0];
 					}
 				}
 				
-				if(!hasLeft){					
+				if(!hasLeft){ // If the enemy is not already moving left				
 					if(Screen.manager.world[yCoord][xCoord + 1].trackID == Values.track){					
 						dir = right;
 						image = Screen.tileset_soldier[2];
@@ -171,7 +170,7 @@ public class Enemy extends Rectangle {
 					loseHealth();
 				}
 					
-				
+				// Reset all direction flags as well as the int to track the enemies coordinates
 				hasUp = false;
 				hasDown = false;
 				hasRight = false;
@@ -181,12 +180,13 @@ public class Enemy extends Rectangle {
 			moveFrame = 0;
 		}				
 		else
-			moveFrame += 1;
-		
-		
-			
+			moveFrame += 1;						
 	}
 	
+	/**
+	 * Function to draw the enemy to the screen
+	 * @param g The Graphics to draw to
+	 */
 	public void draw(Graphics g) {
 		if(isAlive) {
 			g.drawImage(image, x, y, width, height, null);

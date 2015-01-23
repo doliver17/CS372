@@ -48,9 +48,12 @@ public class Store {
     					holdItem = true;
     				}
     			}
-    		}
-    	}
+    		}    		   		
+    	} 		   			
     }
+    
+    
+  
     
     public void define() {
         map = new ImageIcon("res/shop.png").getImage(); // Load the image for the shop background

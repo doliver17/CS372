@@ -7,7 +7,7 @@ package tdfinal;
 
 import java.awt.*;
 /**
- *
+ * Block objects make up the layout of the screen
  * @author Derik
  */
 public class Block extends Rectangle {
@@ -21,11 +21,8 @@ public class Block extends Rectangle {
     }
     
     public void draw(Graphics g) {
-        g.drawImage(Screen.tileset_track[trackID], x, y, width, height, null);
+        if(trackID == Values.track) // If the trackID is equal to the values for a track piece
+    		g.drawImage(Screen.track, x, y, width, height, null);
         //g.drawRect(x, y, width, height);
-        
-        if(airID != Values.airID) {
-            g.drawImage(Screen.tileset_track[airID], x, y, width, height, null);
-        }
     }
 }

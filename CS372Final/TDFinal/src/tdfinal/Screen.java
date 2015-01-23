@@ -7,6 +7,7 @@ package tdfinal;
 
 import javax.swing.*;
 
+import java.util.*;
 import java.awt.*;
 import java.awt.image.CropImageFilter;
 import java.awt.image.FilteredImageSource;
@@ -14,13 +15,13 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.io.*;
 /**
- *
+ * JPanel that does all of the painting, repainting, and moving using multi threading
  * @author Derik
  */
 public class Screen extends JPanel implements Runnable {
     public Thread gameLoop = new Thread(this); // Create a new thread that will be used to draw movement
     
-    public static Image[] tileset_track = new Image[100];// Holds images for the track
+    public static Image track;// Holds image for the track
     public static Image[] tileset_indicators = new Image[8]; // Holds images for indicators
     public static Image[] tileset_buttons = new Image[8]; // Holds images for buttons
     public static Image[] tileset_soldier = new Image[8]; // Holds images for the soldier enemy
@@ -40,11 +41,13 @@ public class Screen extends JPanel implements Runnable {
     public static Store store;
     
     public static Enemy[] enemies = new Enemy[100]; // Holds all the enemies
+
+    public static ArrayList<Tower> towers = new ArrayList<Tower>();
     
     public Screen(Frame frame) {        
         frame.addMouseListener(new KeyHandler()); // Adds a mouse listener to the JFrame
         frame.addMouseMotionListener(new KeyHandler()); // Adds a mouse motion listener to the JFrame
-        gameLoop.start(); // Starts the gameLoop or 'run' function for the thread
+        gameLoop.start(); // Starts the thread
     }
     
     public void Define() {
@@ -55,10 +58,10 @@ public class Screen extends JPanel implements Runnable {
         map = new ImageIcon("res/map.png").getImage(); // Load background image
         	
         
-        for(int i= 0; i < tileset_track.length; i++) {
-            tileset_track[i] = new ImageIcon("res/TrackCorner.png").getImage();// Loads the track images into the array
-            tileset_track[i] = createImage(new FilteredImageSource(tileset_track[i].getSource(), new CropImageFilter(0, 31*i, 31, 31)));
-        } 
+        
+        track = new ImageIcon("res/TrackCorner.png").getImage(); // Initialize the track image file
+        track = createImage(new FilteredImageSource(track.getSource(), new CropImageFilter(0, 31*0, 31, 31)));
+     
         
         // Load images for the indicators
         tileset_indicators[0] = new ImageIcon("res/button.png").getImage();
@@ -85,7 +88,7 @@ public class Screen extends JPanel implements Runnable {
         // Save the configuration of the track
         save.loadSave(new File("save/mission.txt"));
         
-        // Initialize enemies
+        // Initialize enemy objects
         for(int i = 0; i < enemies.length; i++) {
         	enemies[i] = new Enemy();
         }
@@ -95,9 +98,9 @@ public class Screen extends JPanel implements Runnable {
     @Override
     public void paintComponent(Graphics g) {
         if(isFirst) { // If its the first time painting
-            myWidth = getWidth();
-            myHeight = getHeight();
-            Define();
+            myWidth = getWidth(); // Set width
+            myHeight = getHeight(); // Set height
+            Define(); 
             isFirst = false;            
         }
         
@@ -106,19 +109,20 @@ public class Screen extends JPanel implements Runnable {
         
         for(int i = 0; i < enemies.length; i++) {
         	if(enemies[i].isAlive) {
-        		enemies[i].draw(g); // Draws the enemies if they are alive/ on the screen
+        		enemies[i].draw(g); // Draws the enemies if they are alive
         	}
         }
+        
         store.draw(g); // Draws the store
         
-        if(health < 1) {
+        if(health < 1) { // Displays "Game Over" if health < 1
         	g.setColor(Color.red);
         	g.setFont(new Font("Helvetica", Font.BOLD, 40));
         	g.drawString("Game Over", myWidth/2, myHeight/2);
         }
     }
     
-    public int createTime = 2000, createFrame = 0;
+    public int createTime = 2000, createFrame = 0; // The rate to create enemies
     
     public void enemyCreator() { // Creates enemies
     	if(createFrame >= createTime) {
@@ -134,14 +138,15 @@ public class Screen extends JPanel implements Runnable {
     	else
     		createFrame += 1;
     }
-
-    public void run() { // The moving of the enemies is done within the thread's run function
+    
+    // The moving of the enemies along with the repainting is done within the thread's run function
+    public void run() { 
         while(true) {
-            if(!isFirst && health > 0) { // If its not the first time running
+            if(!isFirst && health > 0) { // If its not the first time running and the user has health
             	enemyCreator(); // Creates enemies
             	for(int i= 0; i < enemies.length; i++) {
             		if(enemies[i].isAlive) {
-            			enemies[i].move();
+            			enemies[i].move(); // Moves the enemies
             		}
             	}
             }

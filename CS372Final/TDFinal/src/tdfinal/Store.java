@@ -55,15 +55,15 @@ public class Store {
     public void define() {
         map = new ImageIcon("res/shop.png").getImage(); // Load the image for the shop background
         for(int i = 0; i < button.length; i++) { // Create the buttons
-            button[i] = new Rectangle(31 + ((31 + Space) * i), (Screen.manager.world[Screen.manager.worldHeight - 1][0].y), buttonSize, buttonSize);
+            button[i] = new Rectangle(31 + ((31 + Space) * i), (Screen.manager.world[Screen.manager.worldHeight - 1][0].y - 93), buttonSize, buttonSize);
         }
         
-        buttonHealth = new Rectangle(50, 800, icon, icon); // Create the rectangle for the health indicator
-        money = new Rectangle(200, 800, icon, icon); // Create the rectangle for the money indicator
+        buttonHealth = new Rectangle(50, 707, icon, icon); // Create the rectangle for the health indicator
+        money = new Rectangle(200, 707, icon, icon); // Create the rectangle for the money indicator
     }
     
     public void draw(Graphics g) { // Draw function
-        g.drawImage(map, 28, 792, null); // Draw the shop backgrond
+        g.drawImage(map, 28, 699, null); // Draw the shop backgrond
         g.setFont(new Font("Helvetica", Font.CENTER_BASELINE, 12)); // Font setter
         g.setColor(Color.black);
         for(int i = 0; i < button.length; i++) {
@@ -71,6 +71,7 @@ public class Store {
                 g.setColor(new Color(0, 0, 0, 255));
                 g.fillRect(button[i].x, button[i].y, button[i].width, button[i].height);
             }
+            
             g.drawImage(Screen.tileset_indicators[0], button[i].x, button[i].y, button[i].width, button[i].height, null); // Draws the button background
             g.drawImage(Screen.tileset_buttons[buttonID[i]], button[i].x + 4, button[i].y + 4, button[i].width - 8, button[i].height - 8, null); // Draws the button image
            

@@ -18,7 +18,7 @@ import java.io.*;
  * @author Derik
  */
 public class Screen extends JPanel implements Runnable {
-    public Thread gameLoop = new Thread(this); // Create a new thread
+    public Thread gameLoop = new Thread(this); // Create a new thread that will be used to draw movement
     
     public static Image[] tileset_track = new Image[100];// Holds images for the track
     public static Image[] tileset_indicators = new Image[8]; // Holds images for indicators
@@ -33,7 +33,7 @@ public class Screen extends JPanel implements Runnable {
     
     public static int myWidth, myHeight; // Width and Height of the JPanel
     public static int money = 200; // Starting money	
-    public static int health = 0; // Starting Health
+    public static int health = 10; // Starting Health
     
     public static Manager manager;
     public static Save save;
@@ -135,7 +135,7 @@ public class Screen extends JPanel implements Runnable {
     		createFrame += 1;
     }
 
-    public void run() {
+    public void run() { // The moving of the enemies is done within the thread's run function
         while(true) {
             if(!isFirst && health > 0) { // If its not the first time running
             	enemyCreator(); // Creates enemies
@@ -145,10 +145,14 @@ public class Screen extends JPanel implements Runnable {
             		}
             	}
             }
-           repaint();// Repaint
+            else if(health < 1)
+            	for(int i = 0; i < enemies.length; i++)
+            		enemies[i].deleteEnemy(); // Deletes all enemies on the screen
+            
+           repaint();// Repaint the screen
                         
            try {
-                Thread.sleep(1);
+                Thread.sleep(1);// Causes the thread to pause for 1 millisecond in order to slow down movement
            } 
            catch (Exception ex) {
                System.out.println(ex.getMessage());

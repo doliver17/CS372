@@ -19,5 +19,5 @@ public class Values {
     
     public static int enemyAir = -1;
     public static int enemyG = 0;
-    public static int Ship = 10;
+    public static int Ship = 8;
 }

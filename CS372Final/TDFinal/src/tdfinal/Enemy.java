@@ -95,6 +95,7 @@ public class Enemy extends Rectangle {
 	
 	public int animateFrame = 0, animationSpeed = 300;
 	public int moveFrame = 0, moveSpeed = 15;
+	
 	public void move() {
 		if(animateFrame >= animationSpeed) {
 			Animate();
@@ -123,6 +124,7 @@ public class Enemy extends Rectangle {
 			}
 			
 			eWalk += 1;
+			
 			// Keeps track of coordinates relative to the map's layout
 			if(eWalk == Screen.manager.blockSize) { 
 				if(dir == down)	

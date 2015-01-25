@@ -26,6 +26,7 @@ public class PR2_1 {
         }
         
         for(int i = 0; i < Gerbils.size(); i++) {
+            //Since hop() returns a string, you should output that string here. -2
             Gerbils.get(i).hop();
         }
             

@@ -17,6 +17,7 @@ public class PR2_4 {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        //PT -- check first that args has at least one element. -2
       int x = Integer.parseInt(args[0]);
       SeriesCalculator S = new SeriesCalculator();
         

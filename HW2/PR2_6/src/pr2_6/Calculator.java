@@ -26,7 +26,8 @@ public class Calculator {
         max = -10000;
     }
     
-    
+    //PT -- you actually don't need this, and hiding it gives you more flexibility
+    //     (e.g. to change to a HashMap later)
     public ArrayList<Double> GetList() {
         return scores;
     }

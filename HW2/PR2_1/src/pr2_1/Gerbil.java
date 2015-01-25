@@ -29,6 +29,7 @@ public class Gerbil {
      * The Gerbil's hop function
      * Displays the Gerbil's number and informs the user it is hopping
      */
+    //PT -- this is fine, but I'd prefer seeing the gerbilNumber in this output
     public String hop() {
        return ("This Gerbil is hopping!\n");
     }

@@ -31,7 +31,8 @@ public class PR2_3 {
      public static HashMap<String, Gerbil> fillMap() {
         HashMap<String, Gerbil> gerbils = new HashMap<String, Gerbil>();
          ReadFromFile file = new ReadFromFile();
-         file.ReadIn("C:\\Users\\Derik\\Documents\\GitHub\\CS372\\HW2\\PR2_3\\src\\gNames.txt");
+         //PT -- you don't need the full filepath here
+         file.ReadIn("src\\gNames.txt");
          ArrayList<String> names = file.getNames();
          for(int i = 0; i < 1000; i++) {
             gerbils.put(names.get(rand.nextInt(names.size())), new Gerbil(rand.nextInt(100) + 1));

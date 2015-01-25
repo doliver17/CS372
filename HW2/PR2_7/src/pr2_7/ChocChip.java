@@ -10,6 +10,7 @@ package pr2_7;
  * Subclass of Cookie
  * @author doliver17
  */
+//PT -- good use of inheritence here
 public class ChocChip extends Cookie {
     /**
      * Constructor that initializes cost to $5

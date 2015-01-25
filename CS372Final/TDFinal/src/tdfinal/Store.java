@@ -19,8 +19,8 @@ public class Store {
     public static int icon = 45;
     public static int heldID = 0;
     
-    public static int[] buttonID = {Values.towerLaser, Values.trash, Values.trash, Values.trash, Values.trash, Values.trash, Values.trash, Values.trash};
-    public static int[] buttonPrice = {100, 0, 0, 0, 0, 0, 0, 0};
+    public static int[] buttonID = {Values.redLaserTower, Values.blueLaserTower, Values.goldLaserTower, 7, 7, 7, 7, Values.trash};
+    public static int[] buttonPrice = {100, 200, 300, 0, 0, 0, 0, 0};
     
     public Rectangle[] button = new Rectangle[shopWidth];
     public Rectangle buttonHealth;
@@ -37,18 +37,36 @@ public class Store {
  
     
     public void Click(int mButton) {
-    	if(mButton == 1){ // Right click
+    	if(mButton == 1){ // Right click mouse button
     		for(int i = 0; i < button.length; i++){
     			if(button[i].contains(Screen.ms)) { // The mouse is inside the button
-    				if(buttonID[i] == Values.trash) { // Deletes the item currenty holding
+    				if(buttonID[i] == Values.trash) { // Deletes the item currently holding
     					holdItem = false;
     				}
     				else {
-    					heldID = buttonID[i];
-    					holdItem = true;
+    					if(holdItem != true) { // Can only trash the item in the trash
+	    					heldID = buttonID[i];
+	    					holdItem = true;
+    					}
     				}
     			}
-    		}    		   		
+    		}
+    		
+    		if(holdItem){ // Placing the towers - Changes the fieldID of the block, which will draw the correct tower
+    			if(Screen.money >= buttonPrice[heldID]){ // If you have more money than the item you are holding
+    				for(int i = 0; i < Screen.manager.world.length; i++){
+    					for(int j = 0; j < Screen.manager.world[0].length; j++){
+    						if(Screen.manager.world[i][j].contains(Screen.ms)){
+    							if(Screen.manager.world[i][j].trackID != Values.groundTrack && Screen.manager.world[i][j].fieldID == Values.groundField){
+    								Screen.manager.world[i][j].fieldID = heldID;
+    								Screen.money -= buttonPrice[heldID];
+    						}
+    							
+    					}    					
+    					}
+    				}
+    			}
+    		}
     	} 		   			
     }
     
@@ -83,7 +101,7 @@ public class Store {
             }          
         }
         
-        
+        g.drawString("Killed: " + Screen.killed,140 ,713);
         g.drawImage(Screen.tileset_indicators[2], buttonHealth.x, buttonHealth.y, buttonHealth.width, buttonHealth.height, null); // Draws the hear
         g.drawImage(Screen.tileset_indicators[1], money.x, money.y, money.width, money.height, null); // Draws the coin
         g.setFont(new Font("Helvetica", Font.BOLD, 18)); // Font setter

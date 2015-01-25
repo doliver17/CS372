@@ -17,9 +17,9 @@ public class Frame extends JFrame {
     public static Dimension size = new Dimension(1345, 850);
     
     public Frame() {
-        setTitle(title);
-        setSize(size);
-        setResizable(true);
+        setTitle(title); // Set title to title string
+        setSize(size); // Set size to Dimension object created
+        setResizable(false); // Unable to resize window 
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);        
         
@@ -27,10 +27,10 @@ public class Frame extends JFrame {
     }
     
     public void init() {
-        setLayout(new GridLayout(1, 1, 0, 0));
-        Screen screen = new Screen(this);
-        add(screen);
-        setVisible(true);
+        setLayout(new GridLayout(1, 1, 0, 0)); // Adds objects onto the whole area of the frame
+        Screen screen = new Screen(this); // Create a new screen which extends JPanel
+        add(screen); // Add the JPanel to the JFrame
+        setVisible(true); // Set visibility True
         
     }
     

@@ -33,13 +33,17 @@ public class Manager {
         world = new Block[worldHeight][worldWidth];
         for(int i = 0; i < world.length; i++) {// Fills the 2D Array with Block objects
             for(int j = 0; j < world[0].length; j++) {
-                world[i][j] = new Block(j * blockSize, i * blockSize, blockSize, blockSize, Values.trackID, Values.airID);
+                world[i][j] = new Block(j * blockSize, i * blockSize, blockSize, blockSize, Values.trackID, Values.groundField);
             }
         }
     }
     
-    public void physics() {
-        
+    public void physic() {
+        for(int i = 0; i < world.length; i++) {
+        	for(int j = 0; j < world[0].length; j++){
+        		world[i][j].physic();
+        	}
+        }
     }
     
     /**
@@ -53,5 +57,11 @@ public class Manager {
                 world[i][j].draw(g);
             }
         }
+     
+	    for(int i = 0; i < world.length; i++) { // Draws the 2D Array 
+	        for(int j = 0; j < world[0].length; j++) {
+	            world[i][j].Attack(g);
+	        }
+	    }
     }
 }

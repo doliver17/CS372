@@ -18,31 +18,39 @@ import java.io.*;
  * JPanel that does all of the painting, repainting, and moving using multi threading
  * @author Derik
  */
-public class Screen extends JPanel implements Runnable {
-    public Thread gameLoop = new Thread(this); // Create a new thread that will be used to draw movement
+public class Screen extends JPanel implements Runnable { // All drawing is done here 
+    public Thread gameLoop = new Thread(this); // Creates this Class into a thread
     
     public static Image track;// Holds image for the track
     public static Image[] tileset_indicators = new Image[8]; // Holds images for indicators
     public static Image[] tileset_buttons = new Image[8]; // Holds images for buttons
     public static Image[] tileset_soldier = new Image[8]; // Holds images for the soldier enemy
+    public static Image[] tileset_towers = new Image[8];
     
     public static Image map; // The image for the background map
     
     public static boolean isFirst = true; // Flag for first time running
+    public static boolean isDebug = true;
     
     public static Point ms = new Point(0, 0); // Point to keep track of mouse position
     
     public static int myWidth, myHeight; // Width and Height of the JPanel
     public static int money = 200; // Starting money	
-    public static int health = 10; // Starting Health
+    public static int health = 20; // Starting Health
+    public static int killed = 0, killsToWin = 0, level = 1;
     
     public static Manager manager;
     public static Save save;
     public static Store store;
+    public static Menu menu;
+    
+    private enum STATE {
+    	MENU, GAME
+    };
+    
+    private STATE state = STATE.MENU;
     
     public static Enemy[] enemies = new Enemy[100]; // Holds all the enemies
-
-    public static ArrayList<Tower> towers = new ArrayList<Tower>();
     
     public Screen(Frame frame) {        
         frame.addMouseListener(new KeyHandler()); // Adds a mouse listener to the JFrame
@@ -54,6 +62,7 @@ public class Screen extends JPanel implements Runnable {
         manager = new Manager(); // Initialize other classes
         save = new Save();
         store = new Store();
+        menu = new Menu();
 
         map = new ImageIcon("res/map.png").getImage(); // Load background image
         	
@@ -61,7 +70,10 @@ public class Screen extends JPanel implements Runnable {
         
         track = new ImageIcon("res/TrackCorner.png").getImage(); // Initialize the track image file
         track = createImage(new FilteredImageSource(track.getSource(), new CropImageFilter(0, 31*0, 31, 31)));
-     
+        
+        tileset_towers[0] = new ImageIcon("res/redlasertower.png").getImage();
+        tileset_towers[1] = new ImageIcon("res/blueLaserTower.png").getImage();
+        tileset_towers[2] = new ImageIcon("res/goldLaserTower.png").getImage();
         
         // Load images for the indicators
         tileset_indicators[0] = new ImageIcon("res/button.png").getImage();
@@ -69,7 +81,9 @@ public class Screen extends JPanel implements Runnable {
         tileset_indicators[2] = new ImageIcon("res/heart.png").getImage();
         
         // Load images for the buttons
-        tileset_buttons[4] = new ImageIcon("res/lasertower.png").getImage();
+        tileset_buttons[0] = new ImageIcon("res/redLaserTower.png").getImage();
+        tileset_buttons[1] = new ImageIcon("res/blueLaserTower.png").getImage();
+        tileset_buttons[2] = new ImageIcon("res/goldLaserTower.png").getImage();
         tileset_buttons[3] = new ImageIcon("res/trash.png").getImage();
         
         // Load images for the solider
@@ -104,16 +118,20 @@ public class Screen extends JPanel implements Runnable {
             isFirst = false;            
         }
         
-        g.clearRect(0, 0, getWidth(), getHeight());
-        manager.draw(g); // Draws the map
         
-        for(int i = 0; i < enemies.length; i++) {
-        	if(enemies[i].isAlive) {
-        		enemies[i].draw(g); // Draws the enemies if they are alive
-        	}
-        }
-        
-        store.draw(g); // Draws the store
+	    if(state == STATE.GAME){    
+	    	g.clearRect(0, 0, getWidth(), getHeight());
+	    	manager.draw(g); // Draws the map
+		        for(int i = 0; i < enemies.length; i++) {
+		        	if(enemies[i].isAlive) {
+		        		enemies[i].draw(g); // Draws the enemies if they are alive
+		        	}
+		        }	    
+		     store.draw(g); // Draws the store
+	    }
+	    else if(state == STATE.MENU){
+	    	menu.draw(g);
+	    }
         
         if(health < 1) { // Displays "Game Over" if health < 1
         	g.setColor(Color.red);
@@ -122,13 +140,14 @@ public class Screen extends JPanel implements Runnable {
         }
     }
     
-    public int createTime = 2000, createFrame = 0; // The rate to create enemies
+    public int createTime = 2800, createFrame = 0; // The rate to create enemies
+    public static int killCount = 0;
     
     public void enemyCreator() { // Creates enemies
     	if(createFrame >= createTime) {
     		for(int i = 0; i < enemies.length; i++) {
     			if(!enemies[i].isAlive) { // If the enemy is no longer alive
-    				enemies[i].Create(Values.enemyG); // Create a new one
+    				enemies[i].Create(0); // Create a new one
     				break;
     			}
     				
@@ -137,12 +156,25 @@ public class Screen extends JPanel implements Runnable {
     	}
     	else
     		createFrame += 1;
+    	
+    	if(killCount == 10){
+    		killCount = 0;
+    		if(createTime > 800)
+    			createTime -= 250;
+    		
+    		if(Enemy.moveSpeed > 10)	
+    				Enemy.moveSpeed -= 2;
+
+        	Block.healthTime += 15;
+    	}
     }
+    
     
     // The moving of the enemies along with the repainting is done within the thread's run function
     public void run() { 
         while(true) {
-            if(!isFirst && health > 0) { // If its not the first time running and the user has health
+            if(!isFirst && health > 0 && state == STATE.GAME) { // If its not the first time running and the user has health
+            	manager.physic();
             	enemyCreator(); // Creates enemies
             	for(int i= 0; i < enemies.length; i++) {
             		if(enemies[i].isAlive) {
@@ -150,9 +182,11 @@ public class Screen extends JPanel implements Runnable {
             		}
             	}
             }
-            else if(health < 1)
+            else if(health < 1) {
             	for(int i = 0; i < enemies.length; i++)
             		enemies[i].deleteEnemy(); // Deletes all enemies on the screen
+            	
+            }
             
            repaint();// Repaint the screen
                         

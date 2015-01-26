@@ -16,6 +16,7 @@ public class Triangle extends Shape  {
     public Triangle(int s1, int s2, int s3) 
             throws IllegalArgumentException
     {
+        //PT -- also check that side >= 0. -2
         if(!(s1 + s2 > s3) || !(s2 + s3 > s1) || !(s1 + s3 > s2))
             throw new IllegalArgumentException("Invalid radius entered for the triangle");
         side1 = s1;

@@ -29,6 +29,8 @@ public class PR3_1 {
         
     }
     
+    //PT -- If this parameter is List<Integer>, then it will work with many other classes
+    //PT -- I want the user to be able to retry the input, rather than having you quit the function. -3
     public static ArrayList<Integer> ReadValues() {
         System.out.println("Enter 10 integers separated by a space: ");
         Scanner input = new Scanner(System.in);

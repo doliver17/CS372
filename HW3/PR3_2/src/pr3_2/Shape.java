@@ -11,6 +11,7 @@ package pr3_2;
  * @author doliver17
  */
 public class Shape {
+    //PT -- need javadoc. -2
     public double getArea() {return 0;}
     public double getPerimeter() { return 0;}
 }

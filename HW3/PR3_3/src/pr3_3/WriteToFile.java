@@ -15,7 +15,8 @@ import java.util.logging.Logger;
  * @author doliver17
  */
 public class WriteToFile {
-    private File f = new File("C:\\Users\\Derik\\Desktop\\events.txt");
+    //PT -- don't need full path here
+    private File f = new File("events.txt");
     
     /**
      *   Writes a string to a txt file

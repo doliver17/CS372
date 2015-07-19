@@ -39,6 +39,8 @@ public class PR1_4 {
      * @return The calculated area of the circle
      */
     public static double calculateArea(double r) {
+       //PT: Good work throughout. Well done breaking things out.
+       //    It would even better if this function is its own class, since it's doing something beyond the scope of Main
         double area = Math.PI * (r * r);
         return area;
     }
